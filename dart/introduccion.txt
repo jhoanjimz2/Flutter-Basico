@@ -1,0 +1,316 @@
+
+import 'dart:math' as math;
+
+
+void main() async {
+  
+  
+  /*------------------------Strings------------------------*/
+  final String nombre = 'Tony';
+  const apellido = 'Stark';
+  //nombre = 'Peter';
+  print('$nombre $apellido');
+  
+  /*Números*/
+  int empleados = 10;
+  double salario = 1856.25;
+  
+  print(empleados);
+  print(salario);
+  
+  
+  /*------------------------Boleano------------------------*/
+  bool? isActive = null;
+  
+  if(isActive == null) {
+    print('Está activa');
+  } else {
+    print('Está inactivo');
+  }
+  
+  /*------------------------Listas------------------------*/
+  List<int> numeros = [1,2,3,4,5,6,7,8,9,10];
+  numeros.add(11);
+  print(numeros);
+  
+  final masNumeros = List.generate(100, (int index) => index);
+  print(masNumeros);
+  
+  /*------------------------Mapa------------------------*/
+  /*Map persona = {
+    'nombre': 'Jhoan',
+    'edad': 35,
+    'soltero': true,
+    true: false,
+    1:100,
+    2:500
+    };*/
+  Map<String,dynamic> persona = {
+    'nombre': 'Jhoan',
+    'edad': 35,
+    'soltero': true
+  };
+  persona.addAll({'segundoNombre': 'Alexander'});
+  print(persona);
+  
+  /*------------------------Funciones------------------------*/
+  final nombreDos = 'Jhoan';
+  saludar(nombreDos, 'Greetings');
+  saludar2(nombre: 'Jhoan', mensaje: 'Hi');
+  
+  
+  /*------------------------Clases------------------------*/
+  final wolverine = Heroe(nombre: 'Logan', poder: 'Regeneración');
+  //wolverine.nombre = 'Logan';
+  //wolverine.poder = 'Regeneración';
+  print(wolverine);
+  
+  /*------------------------Constructores con nombre------------------------*/
+  
+  final rawJson = {
+    'nombre': 'Tony Stark',
+    'poder': 'Dinero'
+  };
+  //final ironman = new Heroe(nombre: rawJson['nombre']!, poder: rawJson['poder']!);
+  //print(ironman);
+  
+  final ironman = Heroe.fromJson(rawJson);
+  print(ironman);
+  
+  /*------------------------GETERS SETERS------------------------*/
+  
+  final cuadrado = new Cuadrado(2);
+  cuadrado.area = 100;
+  print( 'area: ${ cuadrado.calculaArea() }' );
+  print( 'lado: ${ cuadrado.lado }' );
+  print( 'area get: ${ cuadrado.area }' );
+  
+  /*------------------------CLASES ABSTRACTAS------------------------*/
+  
+  final perro = new Perro();
+  final gato = new Gato();
+  
+  sonidoAnimal(perro);
+  sonidoAnimal(gato);
+  
+  /*------------------------EXTENDS------------------------*/
+  
+  final superman = new Heroe_('Clark Kent');
+  final luthor   = new Villano('Lex Luthor');
+  
+  print( superman );
+  print( luthor );
+  
+  /*------------------------MIXINS------------------------*/
+  final flipper = new Delfin();
+  flipper.nadar();
+  
+  final batman = new Murcielago();
+  batman.caminar();
+  batman.volar();
+  
+  final garfield = new Gatoo();
+  garfield.caminar();
+  
+  final palomon = new Paloma();
+  palomon.caminar();
+  palomon.volar();
+  
+  final duck = new Pato();
+  duck.caminar();
+  duck.nadar();
+  duck.volar();
+  
+  final tiburoncin = new Tiburon();
+  tiburoncin.nadar();
+  
+  final nemo = new PezVolador();
+  nemo.nadar();
+  nemo.volar();
+  
+  /*------------------------FUTURES ASYNC AWAIT------------------------*/
+  print('Antes de la petición');
+  
+  print( await httpGet('https:://api.nasa.com/aliens'));
+  
+  //httpGet('https:://api.nasa.com/aliens')
+  //  .then( (data) {
+  //    print(data.toUpperCase());
+  //  });
+  
+  print('Fin del programa');
+  
+  final nombreFu = await getNombre('10');
+  print (nombreFu);
+  //getNombre('10').then( (data) => print(data));
+  
+
+}
+
+
+
+
+
+
+
+
+
+
+/*------------------------Funciones------------------------*/
+void saludar(String nombre, [String mensaje = 'Hi']) {
+  print('$mensaje $nombre'); 
+}
+void saludar2({
+  required String nombre, 
+  required String mensaje
+  }) {
+  print('$mensaje $nombre'); 
+}
+
+
+/*------------------------Clases------------------------*/
+class Heroe {
+  String nombre;
+  String poder;
+  
+  //Heroe(this.nombre, this.poder);
+  Heroe({
+    required this.nombre,
+    required this.poder
+  });
+  Heroe.fromJson( Map<String,String> json ):
+    nombre = json['nombre'] ?? 'No tiene nombre',
+    poder  = json['poder'] ?? 'No tiene poder';
+  
+  @override
+  String toString() {
+    return 'Heroe: nombre: ${ this.nombre }, poder: ${ this.poder }';
+  }
+}
+
+/*------------------------GETERS SETERS------------------------*/
+class Cuadrado {
+  
+  double lado = 0; //lado * lado
+  
+  double get area {
+    return this.lado * this.lado;
+  }
+  
+  set area( double valor) {
+    this.lado = math.sqrt(valor);
+  }
+  
+  Cuadrado( double lado ): 
+    this.lado = lado;
+  
+  double calculaArea() {
+    return this.lado * this.lado;
+  }
+  
+}
+
+/*------------------------CLASES ABSTRACTAS------------------------*/
+
+void sonidoAnimal( Animal animal ) {
+  animal.emitirSonido();
+}
+
+abstract class Animal {
+  
+  int? patas;
+  
+  Animal();
+  
+  void emitirSonido();
+  
+}
+
+class Perro implements Animal {
+  
+  int? patas;
+  void emitirSonido() {
+    print('Guauuuuuuuu');
+  }
+}
+
+class Gato implements Animal {
+  
+  int? patas;
+  int? cola;
+  void emitirSonido() {
+    print('Miauuuuuuuu');
+  }
+  
+}
+  
+/*------------------------EXTENDS------------------------*/
+abstract class Personaje {
+  String? poder;
+  String nombre;
+  
+  Personaje(this.nombre);
+  
+  @override
+  String toString() {
+    return '$nombre - $poder';
+  }
+  
+}
+
+class Heroe_ extends Personaje {
+  
+  int valentia = 100;
+  Heroe_( String nombre ):super( nombre );
+  
+}
+
+class Villano extends Personaje {
+  
+  int maldad = 50;
+  Villano( String nombre ):super( nombre );
+}
+  
+
+/*------------------------MIXINS------------------------*/
+
+abstract class AnimalMix { }
+
+abstract class Mamifero extends AnimalMix { }
+abstract class Ave extends AnimalMix { }
+abstract class Pez extends AnimalMix { }
+
+abstract class Volador {
+  void volar() => print('Estoy Volando');
+}
+abstract class Caminante {
+  void caminar() => print('Estoy Caminando');
+}
+abstract class Nadador {
+  void nadar() => print('Estoy Nadando');
+}
+
+class Delfin extends Mamifero with Nadador {}
+class Murcielago extends Mamifero with Caminante,Volador {}
+class Gatoo extends Mamifero with Caminante {}
+class Paloma extends Ave with Caminante,Volador {}
+class Pato extends Ave with Caminante,Volador,Nadador {}
+class Tiburon extends Pez with Nadador {}
+class PezVolador extends Pez with Nadador, Volador {}
+  
+
+/*------------------------FUTURES ASYNC AWAIT------------------------*/
+
+Future<String> getNombre(String id) async {
+  return '$id - Jhoan';
+}
+
+Future<String> httpGet( String url ) {
+  return Future.delayed( new Duration(seconds: 3), () =>
+    'Hola Mundo - 3 segundos'
+  );
+}
+
+
+
+

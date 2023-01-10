@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "564225424514",
+    "project_id": "flutter-jhoan-notificaciones",
+    "storage_bucket": "flutter-jhoan-notificaciones.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:564225424514:android:666788d82a861c35a4089b",
+        "android_client_info": {
+          "package_name": "com.jhoanjimenez.notificaciones"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "564225424514-c8hubu1k0kvd7k3gfhkudk76u3he4bal.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDp07QxIwzB6o5XKDW_lp772Cmq6pduYOA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "564225424514-c8hubu1k0kvd7k3gfhkudk76u3he4bal.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,12 @@
+RECUERDA DEBES 
+    PASAR LAS CARPETAS
+        lib
+        assets
+    INSTALAR DEPENDENCIAS --> pubspec.yaml
+        shared_preferences
+        provider
+    ACTIVAR CARPETA DE ASSETS --> pubspec.yaml
+        assets:
+            - assets/
+    FUNCION CAMBIO DE DARKMODE A LIGTHMODE
+        la funcion se encuentra en el archivo theme_provider.dart de los providers
